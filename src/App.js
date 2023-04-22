@@ -6,6 +6,10 @@ export default function App() {
   const [weatherData, setWeatherData] = useState([])
   //prop drill to savedLocation -> default state array/obj?
   const [savedLocation, setSavedLocation] = useState([]);
+
+  // set a use state for current selected Location card
+  // pass in the first saved location at the 0 index?
+  const [seletedLocation, setSelectedLocation] = useState(savedLocation[0]);
   
   //function for searchBar
   async function searchLocation(e) {
@@ -27,23 +31,27 @@ export default function App() {
       .then((data) => {
         //data is updated saved location document
         setSavedLocation([data])
+        // set current saved location card to the 0 index
+        setSelectedLocation([data[0]])
       })
       .catch((err) => {
         console.log('Error fetching saved', err);
       })
   },[savedLocation])
 
+  // function to get geolocation
+
   //function to handle onSubmit
   return (
     <div>
       <div className ='search-bar-saved-location-container'>
-        <SearchBar locationName={lcoationName} setLocationName={setLocationName}/>
-        <SavedLocation savedLocation={SavedLocation}/>
+        <SearchBar locationName={locationName} setLocationName={setLocationName}/>
+        <SavedLocation savedLocation={savedLocation} onSelect={setSeletedLocation} />
       </div>
 
       <div className = 'weather-stats-eco-tips-container'>
-        <WeatherStats weatherData={weatherData} />
-        <EcoTips weatherData={weatherData} />
+        <WeatherStats weatherData={selectedLocation.weatherData} />
+        <EcoTips weatherData={selectedLocation.weatherData} />
       </div>
     </div>
   )
