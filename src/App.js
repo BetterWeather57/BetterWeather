@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import SearchBar from './Components/SearchBar'
+import {SavedLocation} from './components/SavedLocation'
 export default function App() {
   //prop drill to SearchBar component
   const [locationName, setLocationName] = useState('');
@@ -13,13 +14,15 @@ export default function App() {
   
   //function for searchBar
   async function searchLocation(e) {
-    e.prevent.default();
+    e.preventDefault();
     // useState react hook for searchInput
-    let response = await fetch(`http://localhost:3000/weather/:${locationName}`) //response received as Object
+    let response = await fetch(`http://localhost:3000/weather/${locationName}`) //response received as Object
     const weatherInfo = await response.json();
-    const infoArray = [...weatherInfo];
+    const infoArray = [weatherInfo];
+    console.log('weatherInfo: ', infoArray)
     //pass weatherData into setWeatherData
     await setWeatherData(infoArray);
+
   }
 
 
@@ -46,7 +49,7 @@ export default function App() {
     <div>
       <div className ='search-bar-saved-location-container'>
         <SearchBar locationName={locationName} setLocationName={setLocationName} searchLocation={searchLocation}/>
-        <SavedLocation savedLocation={savedLocation} onSelect={setSeletedLocation} />
+        <SavedLocation savedLocation={savedLocation} onSelect={setSelectedLocation} />
 
       </div>
 

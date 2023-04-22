@@ -60,8 +60,9 @@ module.exports = {
                 use: ['style-loader', 'css-loader'],
               },
               {
-                test: /\.svg$/,
-                use: ['@svgr/webpack'],
+                test: /\.(gif|png|jpe?g|svg|xml|mp3)$/i,
+                // exclude: /node_modules/,
+                use: 'file-loader',
               },
         ]
     }
