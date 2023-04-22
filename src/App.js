@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import SearchBar from './Components/SearchBar'
+import SearchBar from './components/SearchBar'
 import {SavedLocation} from './components/SavedLocation'
 export default function App() {
   //prop drill to SearchBar component
