@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import SearchBar from './Components/SearchBar'
 export default function App() {
   //prop drill to SearchBar component
   const [locationName, setLocationName] = useState('');
@@ -37,8 +37,8 @@ export default function App() {
   return (
     <div>
       <div className ='search-bar-saved-location-container'>
-        <SearchBar locationName={lcoationName} setLocationName={setLocationName}/>
-        <SavedLocation savedLocation={SavedLocation}/>
+        <SearchBar locationName={locationName} setLocationName={setLocationName} searchLocation={searchLocation}/>
+        <SavedLocation savedLocation={savedLocation}/>
       </div>
 
       <div className = 'weather-stats-eco-tips-container'>
