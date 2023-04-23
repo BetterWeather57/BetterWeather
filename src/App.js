@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import SearchBar from './components/SearchBar';
 import { SavedLocation } from './components/SavedLocation';
 import { EcoTips } from './components/EcoTips';
+
 export default function App() {
   //prop drill to SearchBar component
   const [locationName, setLocationName] = useState('');
@@ -55,8 +56,8 @@ export default function App() {
       </div>
 
       <div className = 'weather-stats-eco-tips-container'>
-        <WeatherStats weatherData={selectedLocation.weatherData} />
-        <EcoTips weatherData={selectedLocation.weatherData} />
+        <WeatherStats weatherData={selectedLocation} />
+        <EcoTips weatherData={selectedLocation} />
       </div>
     </div>
   )

@@ -23,6 +23,10 @@
         {
             "condition": "aqi",
             "tip": "It's best to stay indoors and reduce your energy consumption when the air quality is bad. You can also opt for public transportion to reduce air pollution."
+        },
+        {
+            "condition": "default",
+            "tip": "Looks like it's a great day in your area! Still, here are some ways to be more green: reduce energy consumption during peak hours, avoid using air conditioning and instead use natural ventilation, and use public transporation if possible."
         }
     ]
 }
