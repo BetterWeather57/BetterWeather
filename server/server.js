@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true }))
 
 
 // require routers
-// const userRouter = require('./routes/users');
+const userRouter = require('./routes/users.js');
 const weatherController = require('./controllers/weatherController.js')
 
 
@@ -26,7 +26,7 @@ const weatherController = require('./controllers/weatherController.js')
 
 // route handlers
 // user route, saved locations
-// app.use('/', userRouter)
+app.use('/user', userRouter)
 
 
 // weather api route, specific location at /weather/:id ?
