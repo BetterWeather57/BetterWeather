@@ -35,7 +35,7 @@ weatherController.getWeather = async (req, res, next) => {
     // deconstructing necessary weather stats from returned weather data
     const { location, current, forecast } = response;
     const { name, region, localtime } = location;
-    const { temp_f, temp_c, condition, humidity, precip_in, gust_mph, wind_mph, air_quality } = current;
+    const { last_updated, temp_f, temp_c, condition, humidity, precip_in, gust_mph, wind_mph, air_quality } = current;
     // daily/hourly forecast -> hourly for current day, daily conditions for rest of the week
     const eachDay = []
     for (let i = 0; i < forecast.forecastday.length; i++) {
@@ -47,13 +47,15 @@ weatherController.getWeather = async (req, res, next) => {
         day: { maxtemp_f, mintemp_f, avgtemp_f, condition }
       }
       if (i === 0) {
-        const { hour } = currDay
+        const { hour, astro } = currDay
+        const { sunrise, sunset } = astro
         const hourly = []
         hour.forEach(eachHour => {
           const { time, temp_c, temp_f, condition } = eachHour
           hourly.push({ time, temp_c, temp_f, condition })
         })
         newObj.hour = hourly
+        newObj.astro = { sunrise, sunset }
       }
       eachDay.push(newObj)
       continue
@@ -63,7 +65,7 @@ weatherController.getWeather = async (req, res, next) => {
     const object = {
       location: { name, region, localtime },
       condition: condition,
-      current: { temp_f, temp_c, humidity, precip_in, gust_mph, wind_mph, air_quality },
+      current: { last_updated, temp_f, temp_c, humidity, precip_in, gust_mph, wind_mph, air_quality },
       day: eachDay
     }
     console.log(object);

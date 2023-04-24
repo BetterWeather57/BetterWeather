@@ -4,21 +4,31 @@ import ecoTipsData from '../data/ecotips.json';
 
 export const EcoTips = ({selectedLocation}) => {
 
+
+  console.log('selectedLocation', selectedLocation)
+  console.log(typeof selectedLocation.current.temp_f)
 // create helper function to set weather conditionals on passed in data
 // need to update properties on selectedLocation
 const weatherConditionCheck = (selectedLocation) => {
     const ecoTipsArray = [];
 
-    // check if current temp is hot and if it is, create hotTip variable and push to ecoTips array
-    if (selectedLocation.current.temp_f > 80) {
+      // check if current temp is hot and if it is, create hotTip variable and push to ecoTips array
+      if (Math.floor(selectedLocation.current.temp_f) >= 75) {
         const hotTip = ecoTipsData.results.find(
           (tip) => tip.condition === 'hot'
         );
         if (hotTip) ecoTipsArray.push(hotTip);
       }
 
+      if(Math.floor(selectedLocation.current.humidity) > 65) {
+        const humidityTip = ecoTipsData.results.find(
+          (tip) => tip.condition === 'humid'
+        )
+        if (humidityTip) ecoTipsArray.push(humidityTip)
+      }
+
       // check if it's rainy
-      if (selectedLocation.precip_in > .1) {
+      if (selectedLocation.condition.text.includes('rain')) {
         const rainyTip = ecoTipsData.results.find(
           (tip) => tip.condition === 'rainy'
         );
@@ -26,7 +36,7 @@ const weatherConditionCheck = (selectedLocation) => {
       }
 
       // check if it's snowing
-      if (selectedLocation.condition.includes('snow')) {
+      if (selectedLocation.condition.text.includes('snow')) {
         const snowingTip = ecoTipsData.results.find(
           (tip) => tip.condition === 'snowing'
         );
@@ -34,7 +44,7 @@ const weatherConditionCheck = (selectedLocation) => {
       }
 
       // check if it's cold
-      if (selectedLocation.current.temp_f < 60) {
+      if (Math.floor(selectedLocation.current.temp_f) <= 60) {
         const coldTip = ecoTipsData.results.find(
           (tip) => tip.condition === 'cold'
         );
@@ -42,7 +52,7 @@ const weatherConditionCheck = (selectedLocation) => {
       }
 
       // check if aqi is bad
-      if (selectedLocation.air_quality.us-epa-index > 100) {
+      if (selectedLocation.current.air_quality['us-epa-index'] > 100) {
         const aqiTip = ecoTipsData.results.find(
           (tip) => tip.condition === 'aqi'
         );
@@ -56,11 +66,16 @@ const weatherConditionCheck = (selectedLocation) => {
         );
         if (defaultTip) ecoTipsArray.push(defaultTip);
       }
+ 
       return ecoTipsArray
     };
 
 //invoke helperFunction
 const ecoTipsArray = weatherConditionCheck(selectedLocation);
+
+
+console.log('current temp', selectedLocation.current.temp_f);
+console.log('ecoTipsArray', ecoTipsArray);
 
 // map out each item in the ecoTipsArray
 
