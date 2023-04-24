@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import SearchBar from './Components/SearchBar';
+import SearchBar from './components/SearchBar';
 import {SavedLocation} from './components/SavedLocation';
 import { EcoTips } from './components/EcoTips';
 import WeatherStats from './components/WeatherStats';
@@ -7,6 +7,8 @@ import './stylesheets/App.css'
 
 
 export default function App() {
+  
+  
   //prop drill to necessary components
   const [locationName, setLocationName] = useState('');
 
@@ -23,6 +25,7 @@ export default function App() {
   // pass in the first saved location at the 0 index?
   const [selectedLocation, setSelectedLocation] = useState(userLocation);
 
+ 
   // set a state for userId
   // const [userId, setUserId] = useState(null);
 
@@ -72,6 +75,11 @@ export default function App() {
         })
   }}, [userLocation]);
 
+  // function to handle location card select
+
+  const onSelect = (location) => {
+    setSelectedLocation(location)
+  }
 
 // function to fetch savedLocations
 
@@ -96,7 +104,7 @@ export default function App() {
     <div className='grid'>
       <div className ='search-bar-saved-location-container'>
         <SearchBar locationName={locationName} setLocationName={setLocationName} searchLocation={searchLocation}/>
-        <SavedLocation savedLocation={savedLocation} onSelect={setSelectedLocation} />
+        <SavedLocation setSaved={setSaved} setSavedLocation={setSavedLocation} savedLocation={savedLocation} onSelect={setSelectedLocation} selectedLocation={selectedLocation}/>
 
       </div>
       
@@ -104,7 +112,7 @@ export default function App() {
       {/* conditional rendering
         if user hasn't searched any location, frontend renders nothing
         else, frontend renders WeatherStats component */}
-      {selectedLocation && <WeatherStats saved={saved} setSaved={setSaved} setSavedLocation={setSavedLocation} weatherData={weatherData}/>}
+      {selectedLocation && <WeatherStats selectedLocation={selectedLocation} savedLocation={savedLocation} saved={saved} setSaved={setSaved} setSavedLocation={setSavedLocation} weatherData={weatherData} locationName={locationName}/>}
       {selectedLocation && <EcoTips selectedLocation={selectedLocation} />}
       </div>
     </div>

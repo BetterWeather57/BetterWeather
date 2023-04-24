@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import '../stylesheets/WeatherStats.css'
 export default function WeatherStats(props){
-  const {weatherData, setSavedLocation, saved, setSaved} = props;
+  const {weatherData, setSavedLocation, saved, savedLocation, setSaved, locationName, selectedLocation, setSelectedLocation} = props;
 
   console.log('weatherData inside WeatherStats file: ', weatherData)
   console.log('what is the state of saved: ', saved)
@@ -17,14 +17,24 @@ export default function WeatherStats(props){
     if(saved===false){
       //test to see if save button functionality
       console.log('clicked')
-      console.log('weatherData to be saved inside db: ', weatherData)
-      setSaved(true);
-      //fetch request to backend at specific endpoint to save current weather data inside db
+      // console.log('weatherData to be saved inside db: ', weatherData)
+      console.log('selectedLocation: ', selectedLocation) //should be cerritos(default current location)
       //invoke setSaved(true)
-      //invoke setSavedLocation()
+      setSaved(true);
+      //fetch request to get current userId
+      // const userId = 
+      //fetch request to backend at specific endpoint to save current weather data inside db
+      // await fetch(`http://localhost:3000/6444bea26f5f28963025d4d5/addNewLocation`)
+      
+      // invoke setSavedLocation()
+      if(!locationName) {
+        setSavedLocation([selectedLocation])
+      }else{
+        setSavedLocation([...savedLocation, weatherData]);
+      }
     }
-
   }
+  
 
   return(
 
