@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SearchBar from './Components/SearchBar';
 import {SavedLocation} from './components/SavedLocation';
+import { EcoTips } from './components/EcoTips';
 import WeatherStats from './components/WeatherStats';
 import './stylesheets/App.css'
 
@@ -36,7 +37,7 @@ export default function App() {
 // function to fetch savedLocations
   // useEffect(()=>{
   //   //fetch request to endpoint
-  //   fetch(`http://localhost:3000/:${userId}/saved`)
+  //   fetch(`http://localhost:3000/user/:${userId}/saved`)
   //     .then((response) => response.json())
   //     .then((data) => {
   //       //data is updated saved location document
