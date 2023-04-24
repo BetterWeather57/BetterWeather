@@ -32,46 +32,19 @@ weatherController.getWeather = async (req, res, next) => {
         message: { err: 'Error fetching weather data' }
       });
     })
-    const { location, current, forecast } = response;
-    const { name, region, localtime } = location;
-    const { temp_f, condition, humidity, precip_in, gust_mph, wind_mph, air_quality } = current;
-    // daily/hourly forecast -> hourly for current day, daily conditions for rest of the week
-    const eachDay = []
-    for (let i = 0; i < forecast.forecastday.length; i++) {
-      const currDay = forecast.forecastday[i]
-      const { date, day } = currDay
-      const { maxtemp_f, mintemp_f, avgtemp_f, condition } = day
-      const newObj = {
-        date,
-        day: { maxtemp_f, mintemp_f, avgtemp_f, condition }
-      }
-      if (i === 0) {
-        const { hour } = currDay
-        const hourly = []
-        hour.forEach(eachHour => {
-          const { time, temp_c, temp_f, condition } = eachHour
-          hourly.push({ time, temp_c, temp_f, condition })
-        })
-        newObj.hour = hourly
-      }
-      eachDay.push(newObj)
-      continue
-    }  
-
-    // data returned to front end
+    const { location, current, forecast } = response
     const object = {
-      location: { name, region, localtime },
-      condition: condition,
-      current: { temp_f, humidity, precip_in, gust_mph, wind_mph, air_quality },
-      day: eachDay
+      location: location.name,
+      currentTemp: current.temp_f,
+      condition: current.condition
     }
-    // console.log(object);
-    res.locals.stats = object;
-    return next();
+    res.locals.stats = object
+    return next()
 
 }
 
-/* response object template
+/*
+weather api response object template (weather stats for day parsed, no forecast yet)
 {
   location: {
     name: "locationName",
@@ -82,14 +55,50 @@ weatherController.getWeather = async (req, res, next) => {
     "last_updated": "2023-04-22 11:30",
     "temp_c": 16.1,
     "temp_f": 61.0,
-  }
-
-
-
+  },
+"condition": {
+    "text": "Partly cloudy",
+            "icon": "//cdn.weatherapi.com/weather/64x64/day/116.png",
 }
+"humidity": 71,
+"precip_in": 0.0,
+"gust_mph": 12.8,
+"wind_mph": 10.5,
+"air_quality": {
+  "co": 270,
+  "no2": 23,
+  "o3": 46.5,
+  "so2": 7.59
+  "pm2_5": 23,
+  "pm10": 24.0,
+  "us-epa-index": 2,
+  "gb-defra-index": 2,
+},
+
+
+forecast: {
+    forecastdate:[
+       {
+    day:{
+        maxtemp_f:
+        mintemp_f: 
+       },
+    
+    hour: [{
+        temp_f
+        temp_c
+        time
+        condition: {
+            text:
+            condition:
+        }
+}]
 
 
 */
+
+
+
 
 
 
