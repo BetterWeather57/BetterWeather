@@ -23,7 +23,8 @@ export default function App() {
   // pass in the first saved location at the 0 index?
   const [selectedLocation, setSelectedLocation] = useState(userLocation);
 
-  
+  // set a state for userId
+  // const [userId, setUserId] = useState(null);
 
   async function searchLocation(e) {
     e.preventDefault();
@@ -73,15 +74,16 @@ export default function App() {
 
 
 // function to fetch savedLocations
+
   // useEffect(()=>{
   //   //fetch request to endpoint
   //   fetch(`http://localhost:3000/user/:${userId}/saved`)
   //     .then((response) => response.json())
   //     .then((data) => {
   //       //data is updated saved location document
-  //       setSavedLocation([data])
+  //       setSavedLocation({...data})
   //       // set current saved location card to the 0 index
-  //       setSelectedLocation([data[0]])
+  //       setSelectedLocation((data))
   //     })
   //     .catch((err) => {
   //       console.log('Error fetching saved', err);
