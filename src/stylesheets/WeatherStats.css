@@ -1,0 +1,112 @@
+body {
+  background-color: lightskyblue;
+}
+
+.weather-data-display {
+  display: flex;
+  border-radius: 10px;
+  border-width: 0.5px;
+  flex-direction: column;
+  row-gap: 20px;
+  padding: 1rem;
+  align-items: center;
+}
+
+.current-temp-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-style: solid;
+  padding: 1rem;
+  border-radius: 10px;
+  border-width: 0.5px;
+  width: 10%;
+  row-gap: 5px;
+}
+
+
+.hourly-forecast-display-container, .seven-day-forecast-container {
+  display: flex;
+  width: 60%;
+  flex-direction: column;
+  border-radius: 10px;
+  border-width: 0.5px;
+  border-style: solid;
+  padding: 1rem;
+  row-gap: 1rem;
+  align-items: center;
+  overflow-x: auto;
+  border-style: none
+}
+.hourly-forecast-display, .seven-day-forecast-display {
+  display: flex;
+  width: 80%;
+  border-radius: 10px;
+  border-width: 0.5px;
+  border-style: solid;
+  padding: 1rem;
+  row-gap: 1rem;
+  align-items: center;
+  overflow-x: auto;
+}
+
+.seven-day-forecast-display {
+  column-gap: 30px;
+  justify-content: center;
+}
+
+.hourly-forecast-data, .seven-day-forecast-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.other-forecast-info {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  /* flex-direction: column; */
+  border-radius: 10px;
+  border-width: 0.5px;
+  border-style: solid;
+  padding: 1rem;
+  row-gap: 1rem;
+  align-items: start;
+  width: 50%;
+  justify-content: center;
+  column-gap: 20px;
+}
+
+.air-quality-list-container {
+  display: flex;
+  /* flex-direction: column; */
+  
+}
+.air-quality-list {
+  list-style: none;
+  border-radius: 10px;
+  border-width: 0.5px;
+  border-style: solid;
+  padding: 1rem;
+  margin-top: 0;
+  margin-bottom: 0;
+  /* align-items: center; */
+  /* display: flex;
+  flex-direction: column; */
+}
+
+.sunset-sunrise-humidity-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 100%;
+}
+
+.sunset-sunrise, .humidity {
+  border-radius: 10px;
+  border-width: 0.5px;
+  border-style: solid;
+  padding: 1rem;
+}
