@@ -21,7 +21,7 @@
   border-style: solid;
   border-radius: 15px;
   justify-content: center;
-  width: 50%;
+  /* width: 50%; */
   border-color: rgb(20, 75, 255);
   box-shadow: 0 0 5px 2px rgba(255, 157, 19, 0.5);
 
