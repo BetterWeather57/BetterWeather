@@ -2,15 +2,15 @@
     "results": [
         {
             "condition": "humid",
-            "tip": "High humidity can be very comfortable! Instead of an electric dehumidifier, use a bamboo charcoal bag. They are made of natural materials and can be reused by placing them in the sunlight."
+            "tip": "High humidity can be very uncomfortable! Instead of an electric dehumidifier, use a bamboo charcoal bag. They are made of natural materials and can be reused by placing them in the sunlight."
         },
         {
             "condition": "hot",
-            "tip": "Consider using natural ventilation and fans instead of air conditioning, reduce your electric use during peak hours, and stay hydrated."
+            "tip": "It's hot out! Consider using natural ventilation and fans instead of air conditioning, reduce your electric use during peak hours, and stay hydrated."
         },
         {
             "condition": "cold",
-            "tip": "Energy consumption for heating can be very extensive. Consider using sustainable heat sources like heat pumps or biomass boilers, insulating areas of your home, or you could simply wear warmer clothes!"
+            "tip": "It's cold out and energy consumption for heating is expensive.  Consider using sustainable heat sources like heat pumps or biomass boilers, insulating areas of your home, or you could simply wear warmer clothes!"
         },
         {
             "condition": "rainy",
@@ -22,7 +22,7 @@
         },
         {
             "condition": "aqi",
-            "tip": "It's best to stay indoors and reduce your energy consumption when the air quality is bad. You can also opt for public transportion to reduce air pollution."
+            "tip": "Air quality is bad so it's best to stay indoors and reduce your energy consumption. You can also opt for public transportion to reduce air pollution."
         },
         {
             "condition": "default",

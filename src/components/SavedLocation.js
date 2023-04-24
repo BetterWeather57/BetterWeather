@@ -1,9 +1,8 @@
 import React from 'react';
-import { App } from '../App'
+import App from '../App';
 
 // pass in savedLocation and LocationSelect function
-export const SavedLocation = ({savedLocation, seletedLocation }) => {
-
+export const SavedLocation = ({savedLocation, selectedLocation }) => {
 
   return (
     <div className='saved-location-container'>
@@ -11,7 +10,7 @@ export const SavedLocation = ({savedLocation, seletedLocation }) => {
         {savedLocation.map((location, index) => (
             <div key={index} onClick={() => onSelect(location)} >
             <div>{location.name}</div>
-            <div>{location.current_temp}</div>
+            <div>{location.current_temp_f}</div>
             <div>{location.high_temp}</div>
             <div>{location.low_temp}</div>
             </div>
