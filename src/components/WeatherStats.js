@@ -2,26 +2,14 @@ import React, {useState} from 'react'
 import '../stylesheets/WeatherStats.css'
 export default function WeatherStats(props){
   const {weatherData, setSavedLocation, saved, setSaved} = props;
+
   console.log('weatherData inside WeatherStats file: ', weatherData)
   console.log('what is the state of saved: ', saved)
   //extract the hour from last updated time
   const time = weatherData.current.last_updated; //'2023-04-23 19:30'
   const currentHour = time.slice(11)
   console.log('current time: ', currentHour) //19
-
-  function CreateHourlyForecast({weatherData}){
-    // const hourArray = weatherData.day[0].hour.filter((hour, index)=>{
-    //   console.log('current hour: ', hour)
-    //   const hourVar = hour.time.slice(11, 13);
-    //   console.log('currentHour: ', Number(currentHour));
-    //   console.log('hourVar: ', Number(hourVar));
-    //   return Number(currentHour) <= Number(hourVar) ?? hour;
-    // })
-    // console.log(hourArray)
-    // hourArray.map(()=>())
-    
-  }
-
+  const weekDay = [ 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ]
 
   function saveLocation(){
     //check to see if saved state is false
@@ -71,10 +59,10 @@ export default function WeatherStats(props){
               <div key={`day${index}`} className = 'seven-day-forecast-data'>
                 <div className = 'daily-temp-f'><strong>{day.day.maxtemp_f}&deg;F</strong></div>
                 <img className = 'daily-condition-icon' src={`${day.day.condition.icon}`} />
-                <div className = 'daily-date'>{day.date}</div>
+                <div className = 'daily-date'>{weekDay[new Date(day.date).getDay()]}</div>
               </div>
             ))}
-
+          {/* {day.date} */}
           </div>
       </div>
       

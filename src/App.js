@@ -34,11 +34,11 @@ export default function App() {
     console.log('weatherInfo: ', infoObj)
     //pass weatherData into setWeatherData
     await setWeatherData(infoObj);
+    await setSelectedLocation(infoObj)
     await setDidSearch(true);
     await setSaved(false);
+
   }
-
-
 
   // function to get geolocation of the user
   useEffect(() => {
@@ -63,7 +63,7 @@ export default function App() {
     fetch(`http://localhost:3000/weather/${userLocation.coords.latitude},${userLocation.coords.longitude}`)
       .then((response) => response.json())
         .then((data => {
-          setWeatherData([data]);
+          setWeatherData({...data});
           setSelectedLocation(data);
         }))
         .catch((err) => {
@@ -93,8 +93,8 @@ export default function App() {
   return (
     <div className='grid'>
       <div className ='search-bar-saved-location-container'>
-        {/* <SearchBar locationName={locationName} setLocationName={setLocationName} searchLocation={searchLocation}/>
-        <SavedLocation savedLocation={savedLocation} onSelect={setSelectedLocation} /> */}
+        <SearchBar locationName={locationName} setLocationName={setLocationName} searchLocation={searchLocation}/>
+        <SavedLocation savedLocation={savedLocation} onSelect={setSelectedLocation} />
 
       </div>
       
@@ -102,9 +102,8 @@ export default function App() {
       {/* conditional rendering
         if user hasn't searched any location, frontend renders nothing
         else, frontend renders WeatherStats component */}
-      {!didSearch ? null : <WeatherStats saved={saved} setSaved={setSaved} setSavedLocation={setSavedLocation} weatherData={weatherData} />}
-        {/* <WeatherStats weatherData={selectedLocation} /> */}
-        {selectedLocation && <EcoTips selectedLocation={selectedLocation} />}
+      {selectedLocation && <WeatherStats saved={saved} setSaved={setSaved} setSavedLocation={setSavedLocation} weatherData={weatherData}/>}
+      {selectedLocation && <EcoTips selectedLocation={selectedLocation} />}
       </div>
     </div>
   )
