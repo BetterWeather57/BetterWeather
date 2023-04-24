@@ -2,7 +2,7 @@ import React from 'react';
 import { App } from '../App'
 
 // pass in savedLocation and LocationSelect function
-export const SavedLocation = ({savedLocation, seletedLocation }) => {
+export const SavedLocation = ({savedLocation, selectedLocation }) => {
 
 
   return (

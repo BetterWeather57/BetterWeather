@@ -1,7 +1,7 @@
 import React from 'react';
 import '../stylesheets/SearchBar.css'
 const searchBar = (props) => {
-  const {locationName, setLocationName, searchLocation} = props;
+  const {setLocationName, searchLocation} = props;
   return(
     <form className='searchBar' onSubmit={searchLocation}>
       <label>
