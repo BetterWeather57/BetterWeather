@@ -22,9 +22,9 @@ weatherController.getWeather = async (req, res, next) => {
   
   const response = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${locationId}&days=7&aqi=yes`)
     .then(res => res.json())
-    .then(result => { // *** UNFINISHED: parse data to get info needed by frontend
+    .then(result => {
         // console.log(result)
-        return result
+        return result;
     })
     .catch(err => {
       return next({
@@ -74,61 +74,52 @@ weatherController.getWeather = async (req, res, next) => {
 
 }
 
-/*
-weather api response object template (weather stats for day parsed, no forecast yet)
-{
-  location: {
-    name: "locationName",
-    region: "state/region name",
-    localtime: "2023-04-22 11:41"
-  },
-  current: {
-    "last_updated": "2023-04-22 11:30",
-    "temp_c": 16.1,
-    "temp_f": 61.0,
-  },
-"condition": {
-    "text": "Partly cloudy",
-            "icon": "//cdn.weatherapi.com/weather/64x64/day/116.png",
+// get weather data for each location in user's saved locations array
+weatherController.getSavedWeather = async (req, res, next) => {
+  const savedLocationArray = res.locals.savedLocation;
+  const dataArray = [];
+  if (!savedLocationArray.length) return next('There are no saved locations!');
+
+  // for each location in array, send location name, current temp, high temp, low temp, current condition/graphic
+  await savedLocationArray.forEach( async (locationElement) => {
+    const response = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${locationElement}&days=1`)
+    .then(res => res.json())
+    .then(result => {
+        // console.log(result);
+        return result;
+    })
+    .catch(err => {
+      return next({
+        log: `weatherController.getSavedWeather: ${err}`,
+        message: { err: 'Error fetching weather data' }
+      });
+    })
+
+      const { location, current, forecast } = response;
+      const { name, region, country, localtime } = location;
+      const { temp_f, temp_c, condition } = current;
+      const max_temp = forecast.forecastday[0].day.maxtemp_f;
+      const min_temp = forecast.forecastday[0].day.mintemp_f;
+      const avg_temp = forecast.forecastday[0].day.avgtemp_f;
+
+      const object = {
+        location: { name, region, country, localtime },
+        condition: condition,
+        current: { temp_f, temp_c },
+        max: max_temp,
+        min: min_temp,
+        avg: avg_temp,
+      }
+
+      dataArray.push(object);
+  })
+
+
+  console.log(dataArray);
+  res.locals.dataArray = dataArray;
+  return next();
+
 }
-"humidity": 71,
-"precip_in": 0.0,
-"gust_mph": 12.8,
-"wind_mph": 10.5,
-"air_quality": {
-  "co": 270,
-  "no2": 23,
-  "o3": 46.5,
-  "so2": 7.59
-  "pm2_5": 23,
-  "pm10": 24.0,
-  "us-epa-index": 2,
-  "gb-defra-index": 2,
-},
-
-
-forecast: {
-    forecastdate:[
-       {
-    day:{
-        maxtemp_f:
-        mintemp_f: 
-       },
-    
-    hour: [{
-        temp_f
-        temp_c
-        time
-        condition: {
-            text:
-            condition:
-        }
-}]
-
-
-*/
-
-
 
 
 

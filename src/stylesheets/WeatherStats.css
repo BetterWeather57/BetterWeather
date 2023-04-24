@@ -1,29 +1,36 @@
-body {
-  background-color: lightskyblue;
-}
-
 .weather-data-display {
   display: flex;
   border-radius: 10px;
   border-width: 0.5px;
   flex-direction: column;
-  row-gap: 20px;
+  row-gap: 16px;
   padding: 1rem;
   align-items: center;
+  position: relative;
 }
 
 .current-temp-data {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-style: solid;
+  border: 1px solid rgba(0, 0, 0, 0.5);
   padding: 1rem;
   border-radius: 10px;
   border-width: 0.5px;
-  width: 10%;
-  row-gap: 5px;
+  width: 20%;
+  row-gap: 2px;
 }
 
+.location-name {
+  font-size: 40px;
+  padding-bottom: 10px;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.forecast-title {
+  font-size: 18px;
+  padding-bottom: 10px;
+}
 
 .hourly-forecast-display-container, .seven-day-forecast-container {
   display: flex;
@@ -31,9 +38,8 @@ body {
   flex-direction: column;
   border-radius: 10px;
   border-width: 0.5px;
-  border-style: solid;
-  padding: 1rem;
-  row-gap: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  padding: 0.5rem;
   align-items: center;
   overflow-x: auto;
   border-style: none
@@ -43,7 +49,7 @@ body {
   width: 90%;
   border-radius: 10px;
   border-width: 0.5px;
-  border-style: solid;
+  border: 1px solid rgba(0, 0, 0, 0.5);
   padding: 1rem;
   row-gap: 1rem;
   align-items: center;
@@ -65,16 +71,16 @@ body {
 
 .other-forecast-info {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 200px);
 
   /* flex-direction: column; */
   border-radius: 10px;
   border-width: 0.5px;
-  border-style: solid;
+  border: 1px solid rgba(0, 0, 0, 0.5);
   padding: 1rem;
   row-gap: 1rem;
   align-items: start;
-  width: 70%;
+  width: 45%;
   justify-content: center;
   column-gap: 20px;
 }
@@ -82,13 +88,17 @@ body {
 .air-quality-list-container {
   display: flex;
   /* flex-direction: column; */
-  
 }
+
+.element-info {
+  padding-bottom: 1px;
+}
+
 .air-quality-list {
   list-style: none;
   border-radius: 10px;
   border-width: 0.5px;
-  border-style: solid;
+  border: 1px solid rgba(0, 0, 0, 0.5);
   padding: 1rem;
   margin-top: 0;
   margin-bottom: 0;
@@ -107,8 +117,29 @@ body {
 .sunset-sunrise, .humidity {
   border-radius: 10px;
   border-width: 0.5px;
-  border-style: solid;
+  border: 1px solid rgba(0, 0, 0, 0.5);
   padding: 1rem;
+}
+
+.save-button {
+  position: absolute;
+  width: 60px;
+  height: 30px;
+  top: 8px;
+  right: 8px;
+  border: 0px solid rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  background-color: white;
+  transition: background-color 0.15s color 0.15s;
+}
+
+.save-button:hover {
+  background-color: rgb(176, 176, 176);
+  color: white;
+}
+
+.save-button:active {
+  background-color: rgb(109, 108, 108);
 }
 
 ::-webkit-scrollbar {
