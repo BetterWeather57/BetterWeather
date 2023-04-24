@@ -3,8 +3,7 @@ import '../stylesheets/SavedLocations.css'
 
 export const SavedLocation = ({setSavedLocation, savedLocation, onSelect, selectedLocation }) => {
   // console.log(testArr)
-  // console.log('SAVED LOCATION', savedLocation);
-  // console.log('CURRENT LOCATION', selectedLocation);
+
   
   function deleteSavedLocation(name){
     console.log('clicked delete button')
@@ -31,10 +30,9 @@ export const SavedLocation = ({setSavedLocation, savedLocation, onSelect, select
         <div id={index} className='saved-location-cards' key={index} onClick={() => onSelectLocation(location)} style={{cursor:'pointer'}}>
           <div>{location.location.name}, {location.location.region}</div>
           <div>Current: {location.current.temp_f}&deg;F</div>
-              {/* <div>{location.high_temp}</div>
-              <div>{location.low_temp}</div> */}
-              <button id={`button${index}`} onClick={()=>{deleteSavedLocation(location.location.name)}} >delete</button>
-              </div>
+          <img src={location.condition.icon}/>
+          <button id={`button${index}`} onClick={()=>{deleteSavedLocation(location.location.name)}} >delete</button>
+        </div>
         ))}
         
         </div>
