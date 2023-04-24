@@ -6,8 +6,6 @@ import ecoTipsData from '../data/ecotips.json';
 export const EcoTips = ({selectedLocation}) => {
 
 
-  console.log('selectedLocation', selectedLocation)
-  console.log(typeof selectedLocation.current.temp_f)
 // create helper function to set weather conditionals on passed in data
 // need to update properties on selectedLocation
 const weatherConditionCheck = (selectedLocation) => {
@@ -73,10 +71,6 @@ const weatherConditionCheck = (selectedLocation) => {
 
 //invoke helperFunction
 const ecoTipsArray = weatherConditionCheck(selectedLocation);
-
-
-console.log('current temp', selectedLocation.current.temp_f);
-console.log('ecoTipsArray', ecoTipsArray);
 
 // map out each item in the ecoTipsArray
 
