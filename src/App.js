@@ -9,15 +9,20 @@ import './stylesheets/App.css'
 export default function App() {
   //prop drill to necessary components
   const [locationName, setLocationName] = useState('');
+
   const [weatherData, setWeatherData] = useState({});
   const [didSearch, setDidSearch] = useState(false)
   const [saved, setSaved] = useState(false)
   //prop drill to savedLocation -> default state array/obj?
   const [savedLocation, setSavedLocation] = useState([]);
   
+  // set a useState for default location of the user
+  const [userLocation, setUserLocation] = useState(null)
+  
   // set a use state for current selected Location card
   // pass in the first saved location at the 0 index?
-  const [selectedLocation, setSelectedLocation] = useState(savedLocation[0]);
+  const [selectedLocation, setSelectedLocation] = useState(userLocation);
+
   
 
   async function searchLocation(e) {
@@ -32,6 +37,39 @@ export default function App() {
     await setDidSearch(true);
     await setSaved(false);
   }
+
+
+
+  // function to get geolocation of the user
+  useEffect(() => {
+
+    const successCallback = position => {
+      setUserLocation(position)
+      console.log(position);
+    } 
+
+    const errorCallback = error => {
+      console.log(error);
+    }
+
+    navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+     console.log('userlocation', userLocation)
+    }, [])
+
+// function to fetch geolocation weatherData
+
+  useEffect(() => {
+    if (userLocation) {
+    fetch(`http://localhost:3000/weather/${userLocation.coords.latitude},${userLocation.coords.longitude}`)
+      .then((response) => response.json())
+        .then((data => {
+          setWeatherData([data]);
+          setSelectedLocation(data);
+        }))
+        .catch((err) => {
+          console.log('Error fetching geolocation weather data', err)
+        })
+  }}, [userLocation]);
 
 
 // function to fetch savedLocations
@@ -50,14 +88,13 @@ export default function App() {
   //     })
   // },[savedLocation])
 
-  // function to get geolocation
 
   //function to handle onSubmit
   return (
     <div className='grid'>
       <div className ='search-bar-saved-location-container'>
-        <SearchBar locationName={locationName} setLocationName={setLocationName} searchLocation={searchLocation}/>
-        <SavedLocation savedLocation={savedLocation} onSelect={setSelectedLocation} />
+        {/* <SearchBar locationName={locationName} setLocationName={setLocationName} searchLocation={searchLocation}/>
+        <SavedLocation savedLocation={savedLocation} onSelect={setSelectedLocation} /> */}
 
       </div>
       
@@ -67,7 +104,7 @@ export default function App() {
         else, frontend renders WeatherStats component */}
       {!didSearch ? null : <WeatherStats saved={saved} setSaved={setSaved} setSavedLocation={setSavedLocation} weatherData={weatherData} />}
         {/* <WeatherStats weatherData={selectedLocation} /> */}
-        {/* <EcoTips weatherData={selectedLocation} /> */}
+        {selectedLocation && <EcoTips selectedLocation={selectedLocation} />}
       </div>
     </div>
   )
