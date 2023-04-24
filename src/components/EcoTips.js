@@ -1,12 +1,11 @@
 import React from 'react';
 import App from '../App';
+import '../stylesheets/EcoTips.css';
 import ecoTipsData from '../data/ecotips.json';
 
 export const EcoTips = ({selectedLocation}) => {
 
 
-  console.log('selectedLocation', selectedLocation)
-  console.log(typeof selectedLocation.current.temp_f)
 // create helper function to set weather conditionals on passed in data
 // need to update properties on selectedLocation
 const weatherConditionCheck = (selectedLocation) => {
@@ -73,21 +72,17 @@ const weatherConditionCheck = (selectedLocation) => {
 //invoke helperFunction
 const ecoTipsArray = weatherConditionCheck(selectedLocation);
 
-
-console.log('current temp', selectedLocation.current.temp_f);
-console.log('ecoTipsArray', ecoTipsArray);
-
 // map out each item in the ecoTipsArray
 
   return (
     <div className='eco-tips-container'>
-        <h1>Eco Tips</h1>
-        <h2>Here are environmentally-friendly ways to deal with your current conditions!</h2>
         <div className='eco-tips-div'>
-            {ecoTipsArray.map((item, index) => (
+          <h1>Eco Tips</h1>
+          <h2>Here are environmentally-friendly ways to deal with your current conditions!</h2>
+              {ecoTipsArray.map((item, index) => (
                 <p key={index}>{item.tip}</p>
-            ))}
-            </div>
+              ))}
+        </div>
     </div>
 
   )
