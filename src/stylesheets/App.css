@@ -1,0 +1,20 @@
+.grid {
+  display: grid;
+  grid-template-columns: 15% 70%;
+  height: 100%;
+  column-gap: 30px;
+}
+
+.search-bar-saved-location-container {
+  display: flex;
+  border-style: solid;
+  padding: 7px;
+  border-radius: 15px;
+}
+
+.weather-stats-eco-tips-container {
+  display: flex;
+  border-style: solid;
+  border-radius: 15px;
+  justify-content: center;
+}
