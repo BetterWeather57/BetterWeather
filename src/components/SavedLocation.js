@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import '../stylesheets/SavedLocations.css'
 
+
 export const SavedLocation = ({setSavedLocation, savedLocation, onSelect, selectedLocation }) => {
   // console.log(testArr)
 
@@ -15,12 +16,11 @@ export const SavedLocation = ({setSavedLocation, savedLocation, onSelect, select
     })
     console.log('test: ', test)
     setSavedLocation(test);
-    
+    setSaved(false);
   }
 
   // function to update selectedLocation onClick
   const onSelectLocation = location => {
-    console.log('Clicked location:', location);
     onSelect(location)
   }
 
@@ -33,6 +33,7 @@ export const SavedLocation = ({setSavedLocation, savedLocation, onSelect, select
           <img src={location.condition.icon}/>
           <button id={`button${index}`} onClick={()=>{deleteSavedLocation(location.location.name)}} >delete</button>
         </div>
+
         ))}
         
         </div>

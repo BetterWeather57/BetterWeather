@@ -17,7 +17,6 @@ export default function WeatherStats(props){
     if(saved===false){
       //test to see if save button functionality
       console.log('clicked')
-      // console.log('selectedLocation to be saved inside db: ', selectedLocation)
       console.log('selectedLocation: ', selectedLocation) //should be cerritos(default current location)
       //invoke setSaved(true)
       setSaved(true);

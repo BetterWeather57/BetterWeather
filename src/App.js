@@ -105,6 +105,7 @@ export default function App() {
       <div className ='search-bar-saved-location-container'>
         <SearchBar locationName={locationName} setLocationName={setLocationName} searchLocation={searchLocation}/>
         <SavedLocation setSavedLocation={setSavedLocation} savedLocation={savedLocation} onSelect={(location) => setSelectedLocation(location)}/>
+
       </div>
       
       <div className = 'weather-stats-eco-tips-container'>
