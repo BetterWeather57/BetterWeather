@@ -92,47 +92,55 @@ userController.addNewLocation = async (req, res, next) => {
   // if data is returned store and appropriate metrics 
   // store location in mongodb user doc
 
-  const response = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${locationId}&days=7&aqi=yes`)
+  const response = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${newLocation}&days=1`)
     .then(res => res.json())
     .then(result => {
-        // console.log(result)
         return result;
     })
     .catch(err => {
       return next({
-        log: `weatherController.getWeather: ${err}`,
-        message: { err: 'Error fetching weather data' }
+        log: `userController.addNewLocation: ${err}`,
+        message: { err: 'Error fetching weather data for new location' }
       });
     })
 
     // deconstruct response to include simplified metrics for new saved location card
     const { location, current, forecast } = response;
-      const { name, region, country, localtime } = location;
-      const { temp_f, temp_c, condition } = current;
-      const max_temp = forecast.forecastday[0].day.maxtemp_f;
-      const min_temp = forecast.forecastday[0].day.mintemp_f;
-      const avg_temp = forecast.forecastday[0].day.avgtemp_f;
+    const { name, region, country, localtime } = location;
+    const { temp_f, temp_c, condition } = current;
+    const max_temp = forecast.forecastday[0].day.maxtemp_f;
+    const min_temp = forecast.forecastday[0].day.mintemp_f;
+    const avg_temp = forecast.forecastday[0].day.avgtemp_f;
 
-      const object = {
-        location: { name, region, country, localtime },
-        condition: condition,
-        current: { temp_f, temp_c },
-        max: max_temp,
-        min: min_temp,
-        avg: avg_temp,
-      }
+    const object = {
+      location: { name, region, country, localtime },
+      condition: condition,
+      current: { temp_f, temp_c },
+      max: max_temp,
+      min: min_temp,
+      avg: avg_temp,
+    }
 
-      console.log(object);
-      res.locals.newLocationData = object;
+      // console.log(object);
+    res.locals.newLocationData = object;
 
-  User.findOneAndUpdate()
 
-  // .catch(err =>
-  //   next({
-  //     log: `userController.getSavedLocations: ${err}`,
-  //     message: { err: 'Error fetching saved locations' }
-  //   })
-  // )
+    User.findOneAndUpdate(
+      { _id: new ObjectId(`${userId}`) }, 
+      {$addToSet: {savedLocation: object.location.name}}, // addToSet to only add location if not already in array
+      {new: true}
+      )
+      .then(user => {
+        console.log(user);
+        return next()
+      })
+      .catch(err => {
+        console.log(err)
+        return next({
+          log: `userController.addNewLocation: ${err}`,
+          message: { err: 'Error adding location' }
+        })
+      })
 
 }
 
