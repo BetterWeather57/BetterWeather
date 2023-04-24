@@ -4,6 +4,8 @@ import ecoTipsData from '../data/ecotips.json';
 
 export const EcoTips = ({selectedLocation}) => {
 
+
+  console.log('selectedLocation', selectedLocation)
 // create helper function to set weather conditionals on passed in data
 // need to update properties on selectedLocation
 const weatherConditionCheck = (selectedLocation) => {
@@ -18,7 +20,7 @@ const weatherConditionCheck = (selectedLocation) => {
       }
 
       // check if it's rainy
-      if (selectedLocation.precip_in > .1) {
+      if (selectedLocation.current.precip_in > .1) {
         const rainyTip = ecoTipsData.results.find(
           (tip) => tip.condition === 'rainy'
         );
@@ -26,7 +28,7 @@ const weatherConditionCheck = (selectedLocation) => {
       }
 
       // check if it's snowing
-      if (selectedLocation.condition.includes('snow')) {
+      if (selectedLocation.condition.text.includes('snow')) {
         const snowingTip = ecoTipsData.results.find(
           (tip) => tip.condition === 'snowing'
         );
@@ -42,7 +44,7 @@ const weatherConditionCheck = (selectedLocation) => {
       }
 
       // check if aqi is bad
-      if (selectedLocation.air_quality.us-epa-index > 100) {
+      if (selectedLocation.current.air_quality['us-epa-index'] > 100) {
         const aqiTip = ecoTipsData.results.find(
           (tip) => tip.condition === 'aqi'
         );
@@ -61,6 +63,10 @@ const weatherConditionCheck = (selectedLocation) => {
 
 //invoke helperFunction
 const ecoTipsArray = weatherConditionCheck(selectedLocation);
+
+
+console.log('current temp', selectedLocation.current.temp_f);
+console.log('ecoTipsArray', ecoTipsArray);
 
 // map out each item in the ecoTipsArray
 
