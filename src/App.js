@@ -31,7 +31,7 @@ export default function App() {
 // function to fetch savedLocations
   useEffect(()=>{
     //fetch request to endpoint
-    fetch(`http://localhost:3000/:${userId}/saved`)
+    fetch(`http://localhost:3000/user/:${userId}/saved`)
       .then((response) => response.json())
       .then((data) => {
         //data is updated saved location document
