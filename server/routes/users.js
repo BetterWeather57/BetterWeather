@@ -17,6 +17,7 @@ router.post('/signup', userController.createUser, (req, res) => {
 })
 
 router.get('/:userId/saved', userController.getSavedLocations, weatherController.getSavedWeather, (req, res) => {
+  // console.log('final response dataArray ', res.locals.dataArray);
   return res.status(200).json(res.locals.dataArray);
 })
 

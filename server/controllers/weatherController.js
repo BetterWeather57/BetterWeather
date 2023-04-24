@@ -78,11 +78,13 @@ weatherController.getWeather = async (req, res, next) => {
 // get weather data for each location in user's saved locations array
 weatherController.getSavedWeather = async (req, res, next) => {
   const savedLocationArray = res.locals.savedLocation;
+  console.log('saved location array in weather controller middleware: ', savedLocationArray)
   const dataArray = [];
+  // if no locations in user's list, return error msg
   if (!savedLocationArray.length) return next('There are no saved locations!');
 
   // for each location in array, send location name, current temp, high temp, low temp, current condition/graphic
-  await savedLocationArray.forEach( async (locationElement) => {
+  for (let locationElement of savedLocationArray) {
     const response = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${locationElement}&days=1`)
     .then(res => res.json())
     .then(result => {
@@ -95,7 +97,7 @@ weatherController.getSavedWeather = async (req, res, next) => {
         message: { err: 'Error fetching weather data' }
       });
     })
-
+   
       const { location, current, forecast } = response;
       const { name, region, country, localtime } = location;
       const { temp_f, temp_c, condition } = current;
@@ -111,13 +113,12 @@ weatherController.getSavedWeather = async (req, res, next) => {
         min: min_temp,
         avg: avg_temp,
       }
-
+      // console.log(object);
       dataArray.push(object);
-  })
-
-
-  console.log(dataArray);
+  }
+  
   res.locals.dataArray = dataArray;
+  // console.log('this is the final dataArray, ', res.locals.dataArray);
   return next();
 
 }
