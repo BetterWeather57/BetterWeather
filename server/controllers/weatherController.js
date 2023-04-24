@@ -32,14 +32,42 @@ weatherController.getWeather = async (req, res, next) => {
         message: { err: 'Error fetching weather data' }
       });
     })
-    const { location, current, forecast } = response
+    const { location, current, forecast } = response;
+    const { name, region, localtime } = location;
+    const { temp_f, condition, humidity, precip_in, gust_mph, wind_mph, air_quality } = current;
+    // daily/hourly forecast -> hourly for current day, daily conditions for rest of the week
+    const eachDay = []
+    for (let i = 0; i < forecast.forecastday.length; i++) {
+      const currDay = forecast.forecastday[i]
+      const { date, day } = currDay
+      const { maxtemp_f, mintemp_f, avgtemp_f, condition } = day
+      const newObj = {
+        date,
+        day: { maxtemp_f, mintemp_f, avgtemp_f, condition }
+      }
+      if (i === 0) {
+        const { hour } = currDay
+        const hourly = []
+        hour.forEach(eachHour => {
+          const { time, temp_c, temp_f, condition } = eachHour
+          hourly.push({ time, temp_c, temp_f, condition })
+        })
+        newObj.hour = hourly
+      }
+      eachDay.push(newObj)
+      continue
+    }  
+
+    // data returned to front end
     const object = {
-      location: location.name,
-      currentTemp: current.temp_f,
-      condition: current.condition
+      location: { name, region, localtime },
+      condition: condition,
+      current: { temp_f, humidity, precip_in, gust_mph, wind_mph, air_quality },
+      day: eachDay
     }
-    res.locals.stats = object
-    return next()
+    // console.log(object);
+    res.locals.stats = object;
+    return next();
 
 }
 
