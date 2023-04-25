@@ -13,7 +13,7 @@ router.get('/login', userController.verifyUser, (req, res) => {
 
 router.post('/signup', userController.createUser, (req, res) => {
   // 'User successfully created'
-  return res.status(201).json(res.locals.userId);
+  res.redirect('http://localhost:8080/app');
 })
 
 router.get('/:userId/saved', userController.getSavedLocations, weatherController.getSavedWeather, (req, res) => {
