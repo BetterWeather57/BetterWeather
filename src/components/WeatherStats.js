@@ -25,11 +25,11 @@ export default function WeatherStats(props){
         method: 'PATCH',
         headers: {'content-type' : 'application/json'},
         body: JSON.stringify({
-          location: `${selectedLocation.location.name}, ${selectedLocation.location.region}`
+          location: `${selectedLocation.location.name}`
         })
       })
       .then(response=>response.json())
-      .then(data=>{ data})
+      .then(data=>{ return data})
       if(!locationName) {
         setSavedLocation([selectedLocation])
       }else{

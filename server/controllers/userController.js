@@ -1,6 +1,6 @@
 const User = require('../models/userModel.js')
 const ObjectId = require('mongodb').ObjectId; // ObjectId isn't a global variable and needs to be required from mongo
-
+const fetch = require('node-fetch');
 //store api key in .env file!
 const API_KEY = '2d27cf9efb8f4b5a842225540232104'
 
@@ -88,7 +88,7 @@ userController.getSavedLocations = (req, res, next) => {
 userController.addNewLocation = async (req, res, next) => {
   const userId  = req.params.userId; // YES IT'S NOT DRY I KNOW OKAY
   const newLocation = req.body.location; // check that label matches what is sent in the request
-
+  console.log('newLocation: ', newLocation)
   // make fetch req to api with newLocation first to check if valid location, if not valid location return an error
   // if data is returned store and appropriate metrics 
   // store location in mongodb user doc

@@ -104,7 +104,7 @@ export default function App() {
     <div className='grid'>
       <div className ='search-bar-saved-location-container'>
         <SearchBar locationName={locationName} setLocationName={setLocationName} searchLocation={searchLocation}/>
-        <SavedLocation setSavedLocation={setSavedLocation} savedLocation={savedLocation} onSelect={(location) => setSelectedLocation(location)}/>
+        <SavedLocation setSaved={setSaved} setSavedLocation={setSavedLocation} savedLocation={savedLocation} onSelect={(location) => setSelectedLocation(location)}/>
 
       </div>
       
