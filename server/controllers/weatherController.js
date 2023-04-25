@@ -85,7 +85,7 @@ weatherController.getSavedWeather = async (req, res, next) => {
 
   // for each location in array, send location name, current temp, high temp, low temp, current condition/graphic
   for (let locationElement of savedLocationArray) {
-    const response = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${locationElement}&days=1`)
+    const response = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${locationElement}&days=1&aqi=yes`)
     .then(res => res.json())
     .then(result => {
         // console.log(result);
@@ -100,7 +100,7 @@ weatherController.getSavedWeather = async (req, res, next) => {
    
       const { location, current, forecast } = response;
       const { name, region, country, localtime } = location;
-      const { temp_f, temp_c, condition } = current;
+      const { temp_f, temp_c, condition, air_quality } = current;
       const max_temp = forecast.forecastday[0].day.maxtemp_f;
       const min_temp = forecast.forecastday[0].day.mintemp_f;
       const avg_temp = forecast.forecastday[0].day.avgtemp_f;
@@ -108,7 +108,7 @@ weatherController.getSavedWeather = async (req, res, next) => {
       const object = {
         location: { name, region, country, localtime },
         condition: condition,
-        current: { temp_f, temp_c },
+        current: { temp_f, temp_c, air_quality },
         max: max_temp,
         min: min_temp,
         avg: avg_temp,
