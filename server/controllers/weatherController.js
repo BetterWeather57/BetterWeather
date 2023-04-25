@@ -32,7 +32,6 @@ weatherController.getWeather = async (req, res, next) => {
         message: { err: 'Error fetching weather data' }
       });
     })
-
     // deconstructing necessary weather stats from returned weather data
     const { location, current, forecast } = response;
     const { name, region, localtime } = location;
@@ -115,9 +114,42 @@ weatherController.getSavedWeather = async (req, res, next) => {
       dataArray.push(object);
   })
 
+  // for each location in array, send location name, current temp, high temp, low temp, current condition/graphic
+  for (let locationElement of savedLocationArray) {
+    const response = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${locationElement}&days=1`)
+    .then(res => res.json())
+    .then(result => {
+        // console.log(result);
+        return result;
+    })
+    .catch(err => {
+      return next({
+        log: `weatherController.getSavedWeather: ${err}`,
+        message: { err: 'Error fetching weather data' }
+      });
+    })
+   
+      const { location, current, forecast } = response;
+      const { name, region, country, localtime } = location;
+      const { temp_f, temp_c, condition } = current;
+      const max_temp = forecast.forecastday[0].day.maxtemp_f;
+      const min_temp = forecast.forecastday[0].day.mintemp_f;
+      const avg_temp = forecast.forecastday[0].day.avgtemp_f;
 
-  console.log(dataArray);
+      const object = {
+        location: { name, region, country, localtime },
+        condition: condition,
+        current: { temp_f, temp_c },
+        max: max_temp,
+        min: min_temp,
+        avg: avg_temp,
+      }
+      // console.log(object);
+      dataArray.push(object);
+  }
+  
   res.locals.dataArray = dataArray;
+  // console.log('this is the final dataArray, ', res.locals.dataArray);
   return next();
 
 }

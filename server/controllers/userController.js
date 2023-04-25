@@ -71,7 +71,8 @@ userController.getSavedLocations = (req, res, next) => {
   User.find({ _id: new ObjectId(`${userId}`) }).exec()
     .then(user => {
       // store saved location array on res locals
-      res.locals.savedLocation = user.savedLocation;
+      res.locals.savedLocation = user[0].savedLocation;
+      // console.log('user saved locations: ', res.locals.savedLocation)
       return next();
     })
     .catch(err =>

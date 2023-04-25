@@ -1,6 +1,6 @@
 .eco-tips-container {
     display: flex;
-    width: 70%;
+    width: 85%;
     align-self: center;
     padding-bottom: 1rem;
   }
@@ -8,11 +8,11 @@
   .eco-tips-div {
     border-radius: 10px;
     border-width: 0.5px;
-    border-style: solid;
-    padding: 1rem;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    padding: 0rem 1rem;
   }
 
   .eco-tips-div h2 {
-    font-size: 1rem;
+    font-size: 1.3rem;
   }
 
