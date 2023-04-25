@@ -9,6 +9,7 @@ const userController = {}
 // middleware to create new user w/ username and password
 userController.createUser = (req, res, next) => {
   const { username, password } = req.body
+  console.log('user', req.body)
   if ( !username || !password ) {
     return next({
       log: 'userController.createUser',
