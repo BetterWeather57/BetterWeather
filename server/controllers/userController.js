@@ -147,6 +147,27 @@ userController.addNewLocation = async (req, res, next) => {
 
 // delete location from user's saved list
 userController.deleteLocation = (req, res, next) => {
+  const userId  = req.params.userId; // LAST TIME PROMISE
+  const locationToDelete = req.body.location;
+
+  User.findOneAndUpdate(
+    { _id: new ObjectId(`${userId}`) }, 
+    { $pull: {savedLocation: locationToDelete}},
+    {new: true}
+    )
+    .then( user => {
+      console.log(user);
+      return next();
+    })
+    .catch(err => {
+      console.log(err)
+      return next({
+        log: `userController.deleteLocation: ${err}`,
+        message: { err: 'Error deleting location' }
+      })
+    })
+
+  // return next();
 
 }
 

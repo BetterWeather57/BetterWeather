@@ -26,7 +26,8 @@ router.patch('/:userId/addNewLocation', userController.addNewLocation, (req, res
   return res.status(200).json(res.locals.newLocationData);
 })
 
-router.delete('/:userId/deleteLocation', userController.deleteLocation, (req, res) => {
+// patch req because we're just updating the saved locations array, not deleting any properties in our document
+router.patch('/:userId/deleteLocation', userController.deleteLocation, (req, res) => {
   return res.status(200).send('Location deleted.');
 })
 
