@@ -14,9 +14,9 @@ mongoose.connect(MONGO_URI, {
 const userSchema = new Schema({
   username: {type: String, required: true, unique: true},
   password: {type: String, required: true},
-  savedLocation: [{
-    location: {type: String}
-  }]
+  savedLocation: [
+    {type: String}
+  ]
 })
 
 const User = mongoose.model('user', userSchema)

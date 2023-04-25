@@ -3,7 +3,6 @@ body {
   font-family: 'Roboto Condensed', sans-serif;
 }
 
-
 .grid {
   display: grid;
   grid-template-columns: 18% 70%;
