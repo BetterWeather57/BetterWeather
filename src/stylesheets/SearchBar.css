@@ -4,6 +4,11 @@
   margin-top: 6px;
 }
 
+.search-bar-saved-location-container {
+  display: flex;
+  flex-direction: column;
+}
+
 .location-input-bar {
   border: 1px solid grey;
   border-radius: 10px;

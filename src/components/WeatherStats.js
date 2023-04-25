@@ -11,16 +11,22 @@ export default function WeatherStats(props){
   const currentHour = time.slice(11)
   // console.log('current time: ', currentHour) //19
   const body = document.querySelector('body')
+  const name = document.querySelector('#location-name')
   const condition = selectedLocation.condition.text
   // console.log('condition', condition)
   // change background based on conditions
-  condition.includes('Clear') ? 
-      body.setAttribute('style', 'background-image: linear-gradient(-90deg, #0D324D 30%, #7F5A83 99%);' ) :
-  condition.includes('snow' || 'Snow' || 'Blizzard' || 'freezing' || 'Freezing') ?
-      body.setAttribute('style', 'background-image: linear-gradient(-90deg, #FFFFFF 30%, #91A6FF 80%);' ) :
-  condition.includes('cloudy' || 'Cloudy' || 'Overcast' || 'Mist' || 'Fog' || 'fog' || 'drizzle' || 'showers') ?
-      body.setAttribute('style', 'background-image: linear-gradient(-90deg, #DBE7FC 30%, #1D2951 99%);' ) :
-  body.setAttribute('style', 'background-image: linear-gradient(-90deg, #AFF1DA 30%, #F9EA8F 99%);' )
+  if (condition.includes('Clear')) {
+      body.setAttribute('style', 'background-image: linear-gradient(-90deg, #0D324D 30%, #7F5A83 99%); color: white;' );
+      name.setAttribute('style', 'color: white')
+  } else if (condition.includes('snow' || 'Snow' || 'Blizzard' || 'freezing' || 'Freezing')) {
+      body.setAttribute('style', 'background-image: linear-gradient(-90deg, #FFFFFF 30%, #91A6FF 80%);' );
+  } else if (condition.includes('cloudy' || 'Cloudy' || 'Overcast' || 'Mist' || 'Fog' || 'fog' || 'drizzle' || 'showers')) {
+      body.setAttribute('style', 'background-image: linear-gradient(-90deg, #DBE7FC 30%, #1D2951 99%);' );
+    } else {
+      body.setAttribute('style', 'background-image: linear-gradient(-90deg, #AFF1DA 30%, #F9EA8F 99%);' );
+  }
+       
+  
 
 
 
@@ -69,7 +75,7 @@ export default function WeatherStats(props){
 
     <div className = 'weather-data-display'>
       <div className = 'current-temp-data'>
-        <div className='location-name'>{selectedLocation.location.name}</div>
+        <div className='location-name' id='location-name'>{selectedLocation.location.name}</div>
         <div className='location-region'>{selectedLocation.location.region}</div>
         <div className='current-temp'>{selectedLocation.current.temp_f}&deg;F / {selectedLocation.current.temp_c}&deg;C</div>
         <div className='current-temp-text'>{selectedLocation.condition.text}</div>
