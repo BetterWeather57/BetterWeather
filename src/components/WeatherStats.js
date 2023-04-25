@@ -11,7 +11,7 @@ export default function WeatherStats(props){
   console.log('current time: ', currentHour) //19
   const weekDay = [ 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ]
 
-  function saveLocation(){
+  async function saveLocation(){
     //check to see if saved state is false
       //this will only allow users to save current weather data once to mitigate duplicates
     if(saved===false){
@@ -20,21 +20,24 @@ export default function WeatherStats(props){
       console.log('selectedLocation: ', selectedLocation) //should be cerritos(default current location)
       //invoke setSaved(true)
       setSaved(true);
-      //fetch request to get current userId
-      // const userId = 
       //fetch request to backend at specific endpoint to save current weather data inside db
-      // await fetch(`http://localhost:3000/6444bea26f5f28963025d4d5/addNewLocation`)
-      
-      // invoke setSavedLocation()
+      await fetch(`http://localhost:3000/user/6444bea26f5f28963025d4d5/addNewLocation`, {
+        method: 'PATCH',
+        headers: {'content-type' : 'application/json'},
+        body: JSON.stringify({
+          location: `${selectedLocation.location.name}, ${selectedLocation.location.region}`
+        })
+      })
+      .then(response=>response.json())
+      .then(data=>{ data})
       if(!locationName) {
         setSavedLocation([selectedLocation])
       }else{
         setSavedLocation([...savedLocation, selectedLocation]);
       }
     }
-  }
-  
 
+  }
   return(
 
     <div className = 'weather-data-display'>
