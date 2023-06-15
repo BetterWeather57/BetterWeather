@@ -1,3 +1,5 @@
+<p align="center"><img src="./better-weather-readme-logo.png" alt="better-weather-logo" height="220"/></p>
+
 # Better Weather
 
 Better Weather is an eco-conscious weather forecast app. Get real-time weather data on your current location, along with tips on dealing with your conditions (humidity, AQI, temperature, etc.) in an environmentally-friendly way.
