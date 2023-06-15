@@ -1,0 +1,34 @@
+{
+    "results": [
+        {
+            "condition": "humid",
+            "tip": "High humidity can be very uncomfortable! Instead of an electric dehumidifier, use a bamboo charcoal bag. They are made of natural materials and can be reused by placing them in the sunlight."
+        },
+        {
+            "condition": "hot",
+            "tip": "It's hot out! Consider using natural ventilation and fans instead of air conditioning, reduce your electric use during peak hours, and stay hydrated."
+        },
+        {
+            "condition": "cold",
+            "tip": "It's cold out and energy consumption for heating is expensive.  Consider using sustainable heat sources like heat pumps or biomass boilers, insulating areas of your home, or you could simply wear warmer clothes!"
+        },
+        {
+            "condition": "rainy",
+            "tip": "Some ways to be more eco-conscious during rainy days: collection rainwater to water your garden or plants, skip plastic ponchos or umbrellas by getting high-quality eusable rain gear, and use natural cleaning products as they tend to pollute waterways."
+        },
+        {
+            "condition": "snowing",
+            "tip": "It might be snowing but there are definitely ways to be eco-friendly: donate any unused warm clothes to a local shelter, use a shovel instead of a snow blower, or consider driving less."
+        },
+        {
+            "condition": "aqi",
+            "tip": "Air quality is bad so it's best to stay indoors and reduce your energy consumption. You can also opt for public transportion to reduce air pollution."
+        },
+        {
+            "condition": "default",
+            "tip": "Looks like it's a great day in your area! Still, here are some ways to be more green: reduce energy consumption during peak hours, avoid using air conditioning and instead use natural ventilation, and use public transporation if possible."
+        }
+    ]
+}
+
+

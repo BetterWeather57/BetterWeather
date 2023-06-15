@@ -1,0 +1,32 @@
+.searchBar {
+  width: 90%;
+  margin-left: 6px;
+  margin-top: 6px;
+}
+
+.search-bar-saved-location-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.location-input-bar {
+  border: 1px solid grey;
+  border-radius: 10px;
+  height: 40px;
+  width: 100%;
+  box-shadow: 0 0 5px 2px rgba(70, 110, 255, 0.5);
+  /* outline: 0; */
+  border-style: none;
+  background-color: #BDD4E7;
+  /* background-color: #7ac3ff; */
+  padding-left: 10px;
+  color: rgb(37, 37, 37);
+  font-size: 16px;
+}
+.location-input-bar:focus {
+  outline: none;
+}
+.location-input-bar:hover {
+  background-color: white;
+  transition: 150ms;
+}

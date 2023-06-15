@@ -1,8 +1,52 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const path = require('path');
 const app = express();
+const cors = require('cors')
 const PORT = 3000;
+
+// require routes
+
+
+app.use(cors())
+// parse request body
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+// app.use(cookieParser()); // for req.cookies
+
+
+// require routers
+const userRouter = require('./routes/users.js');
+const weatherController = require('./controllers/weatherController.js')
+
+
+// static files
+
+
+
+
+// route handlers
+// user route, saved locations
+app.use('/user', userRouter)
+
+
+// weather api route, specific location at /weather/:id ?
+app.get('/weather/:location', weatherController.getWeather, (req, res) => {
+  return res.status(200).json(res.locals.stats);
+});
+
+
+// database/saved locations route
+// app.use('/saved-locations', )
+
+
+
+
+
+
+
+
+
+
 
 //local error handler
 app.use((req, res) => res.status(404).send('This is not the page you\'re looking for...'));
